@@ -9,9 +9,15 @@ class Game
 
   def run
     turn = 0
+    x = y = nil
     loop do
       prompt
-      x, y = get_move
+      loop do
+        x, y = get_move
+        break unless taken?(x, y)
+        puts "That cell is already taken. Try again."
+        print "(#{@current_player.shape})> "
+      end
       set_cell(x, y, current_player.shape)
       if board.winner? current_player
         display_current_grid
@@ -67,6 +73,10 @@ class Game
     moves[move]
   end
 
+  def taken?(x, y)
+    board.taken?(x, y)
+  end
+
   def game_over?
     board.winner? @current_player
   end
@@ -88,6 +98,10 @@ class Board
 
   def get_cell(x, y)
     grid[x][y]
+  end
+
+  def taken?(x, y)
+    get_cell(x, y).value != ' '
   end
 
   def display
