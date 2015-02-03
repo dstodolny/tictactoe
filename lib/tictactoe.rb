@@ -157,5 +157,5 @@ class Player
   end
 end
 
-game = Game.new([Player.new("Player 1", "X"), Player.new("Player 2", "O")])
-game.run
+# game = Game.new([Player.new("Player 1", "X"), Player.new("Player 2", "O")])
+# game.run
